@@ -12,16 +12,12 @@ from register_student import register_student
 
 app = FastAPI()
 
-# ---- Base Path ----
+# ================= BASE PATH =================
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# ---- Frontend Paths ----
-templates_path = os.path.join(BASE_DIR, "frontend", "templates")
-static_path = os.path.join(BASE_DIR, "frontend", "static")
-
-templates = Jinja2Templates(directory=templates_path)
-
-app.mount("/static", StaticFiles(directory=static_path), name="static")
+# ================= FRONTEND =================
+templates = Jinja2Templates(directory=os.path.join(BASE_DIR, "frontend", "templates"))
+app.mount("/static", StaticFiles(directory=os.path.join(BASE_DIR, "frontend", "static")), name="static")
 
 
 # ================= HOME =================
@@ -33,39 +29,53 @@ def home(request: Request):
 # ================= START ATTENDANCE =================
 @app.get("/start-attendance")
 def start_attendance():
-
-    thread = threading.Thread(target=start_recognition)
-    thread.start()
-
-    return {"message": "Attendance started"}
+    threading.Thread(target=start_recognition).start()
+    return {"message": "Attendance Started"}
 
 
 # ================= REGISTER STUDENT =================
 @app.post("/register-student")
-def register_student_api(name: str = Form(...), roll: str = Form(...)):
-
-    thread = threading.Thread(target=register_student, args=(name, roll))
-    thread.start()
-
-    return {"message": "Registration started"}
+def register(name: str = Form(...), roll: str = Form(...)):
+    threading.Thread(target=register_student, args=(name, roll)).start()
+    return {"message": "Registration Started"}
 
 
-# ================= VIEW ATTENDANCE =================
+# ================= DOWNLOAD ATTENDANCE =================
 @app.get("/attendance-file")
-def view_attendance():
+def download_attendance():
 
     file_path = os.path.join(BASE_DIR, "attendance.xlsx")
 
-    # ✅ AUTO CREATE FILE IF NOT EXISTS
+    # Auto-create file if missing
     if not os.path.exists(file_path):
-
-        print("Creating attendance file...")
-
         df = pd.DataFrame(columns=["Name", "Roll", "Timestamp"])
         df.to_excel(file_path, index=False)
 
-    return FileResponse(
-        path=file_path,
-        filename="attendance.xlsx",
-        media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-    )
+    return FileResponse(file_path, filename="attendance.xlsx")
+
+
+# ================= REGISTERED STUDENTS (FROM DATASET) =================
+@app.get("/student-data")
+def student_data():
+
+    dataset_path = os.path.join(BASE_DIR, "dataset")
+
+    if not os.path.exists(dataset_path):
+        return {"students": [], "total": 0}
+
+    students = []
+
+    for folder in os.listdir(dataset_path):
+
+        if "_" in folder:
+            roll, name = folder.split("_", 1)
+
+            students.append({
+                "Name": name,
+                "Roll": roll
+            })
+
+    return {
+        "students": students,
+        "total": len(students)
+    }
