@@ -1,62 +1,40 @@
 function startAttendance(){
-
-fetch("/start-attendance")
-.then(res => res.json())
-.then(data=>{
-alert("Attendance started. Camera will open.")
-})
-
+    fetch("/start-attendance")
 }
-
 
 function registerStudent(){
+    let name=document.getElementById("name").value
+    let roll=document.getElementById("roll").value
 
-let nameBox = document.getElementById("name")
-let rollBox = document.getElementById("roll")
+    fetch("/register-student",{
+        method:"POST",
+        headers:{"Content-Type":"application/x-www-form-urlencoded"},
+        body:`name=${name}&roll=${roll}`
+    })
 
-let name = nameBox.value
-let roll = rollBox.value
-
-if(name === "" || roll === ""){
-alert("Please enter name and roll number")
-return
+    document.getElementById("name").value=""
+    document.getElementById("roll").value=""
 }
-
-fetch("/register-student",{
-
-method:"POST",
-
-headers:{
-"Content-Type":"application/x-www-form-urlencoded"
-},
-
-body:"name="+name+"&roll="+roll
-
-})
-
-.then(res=>res.json())
-.then(data=>{
-
-alert("Registration started. Look at camera.")
-
-nameBox.value=""
-rollBox.value=""
-
-})
-
-}
-
 
 function clearInputs(){
-
-document.getElementById("name").value=""
-document.getElementById("roll").value=""
-
+    document.getElementById("name").value=""
+    document.getElementById("roll").value=""
 }
 
+function loadStudents(){
+    fetch("/student-data")
+    .then(res=>res.json())
+    .then(data=>{
+        let table=document.getElementById("students")
+        table.innerHTML=""
+        document.getElementById("total").innerText=data.total
 
-function viewAttendance(){
+        data.students.forEach(s=>{
+            table.innerHTML+=`<tr><td>${s.Name}</td><td>${s.Roll}</td></tr>`
+        })
+    })
+}
 
-window.open("/attendance-file")
-
+function downloadAttendance(){
+    window.open("/attendance-file")
 }

@@ -1,34 +1,116 @@
-body{
-
-font-family: Arial;
-text-align:center;
-background:#f2f2f2;
-
+/* BACKGROUND */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
 }
 
-button{
-
-padding:15px;
-font-size:18px;
-margin:10px;
-background:#007BFF;
-color:white;
-border:none;
-border-radius:6px;
-cursor:pointer;
-
+/* MAIN CONTAINER */
+.container {
+    width: 85%;
+    margin: auto;
+    padding: 20px;
 }
 
-button:hover{
-
-background:#0056b3;
-
+/* TITLE */
+h1 {
+    text-align: center;
+    color: white;
+    margin-bottom: 30px;
 }
 
-input{
+/* CARD DESIGN */
+.card {
+    background: white;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
 
-padding:10px;
-font-size:16px;
-margin:5px;
+/* INPUT BOX */
+input {
+    width: 40%;
+    padding: 12px;
+    margin: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: 0.2s;
+}
 
+input:focus {
+    border-color: #007bff;
+}
+
+/* BUTTONS */
+.btn {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 5px;
+    transition: 0.2s;
+}
+
+/* BUTTON COLORS */
+.green { background: #28a745; }
+.blue { background: #007bff; }
+.red { background: #dc3545; }
+.purple { background: #6f42c1; }
+
+/* BUTTON HOVER */
+.btn:hover {
+    opacity: 0.85;
+    transform: scale(1.05);
+}
+
+/* TABLE STYLING */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    margin-top: 15px;
+}
+
+/* HEADER */
+thead th {
+    background: #007bff;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* ROW DESIGN */
+tbody tr {
+    background: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+/* HOVER EFFECT */
+tbody tr:hover {
+    transform: scale(1.01);
+    background: #f1f7ff;
+}
+
+/* CELL */
+td, th {
+    padding: 12px;
+    text-align: center;
+}
+
+/* 👉 ONLY CHANGE ADDED */
+td:first-child, th:first-child {
+    border-right: 2px solid #ddd;
+}
+
+/* TOTAL TEXT */
+p {
+    font-weight: bold;
+    margin-top: 10px;
 }

@@ -2,40 +2,66 @@
 <html>
 
 <head>
-<title>AI Virtual Attendance System</title>
-<link rel="stylesheet" href="/static/style.css">
+    <title>AI  Virtual Attendance </title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 
 <body>
 
-<h1>AI Virtual Attendance System</h1>
+<div class="container">
 
-<br><br>
+    <h1>🎓 AI Virtual Attendance</h1>
 
-<button onclick="startAttendance()">Start Attendance</button>
+    <!-- ACTION -->
+    <div class="card">
+        <h2>🎥 Attendance</h2>
 
-<br><br>
+        <button onclick="startAttendance()" class="btn green">
+            Start Attendance
+        </button>
 
-<h2>Register Student</h2>
+        <button onclick="downloadAttendance()" class="btn blue">
+            Download Excel
+        </button>
+    </div>
 
-<input type="text" id="name" placeholder="Student Name">
+    <!-- REGISTER -->
+    <div class="card">
+        <h2>📝 Register New Student</h2>
 
-<br><br>
+        <input id="name" placeholder="Enter Name">
+        <input id="roll" placeholder="Enter Roll Number">
 
-<input type="text" id="roll" placeholder="Roll Number">
+        <div class="row">
+            <button onclick="registerStudent()" class="btn green">Register</button>
+            <button onclick="clearInputs()" class="btn red">Clear</button>
+        </div>
+    </div>
 
-<br><br>
+    <!-- STUDENTS -->
+    <div class="card">
+        <h2>👨‍🎓 Registered Students</h2>
 
-<button onclick="registerStudent()">Start Registration</button>
+        <button onclick="loadStudents()" class="btn purple">
+            View Students
+        </button>
 
-<button onclick="clearInputs()">Clear</button>
+        <p>Total Students: <span id="total">0</span></p>
 
-<br><br>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Roll No</th>
+                </tr>
+            </thead>
+            <tbody id="students"></tbody>
+        </table>
+    </div>
 
-<button onclick="viewAttendance()">View Attendance</button>
+</div>
 
 <script src="/static/script.js"></script>
 
 </body>
-
 </html>
