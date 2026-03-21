@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+opencv-python
+face-recognition
+dlib
+numpy
+pandas
+openpyxl
+jinja2
+python-multipart
+excel file
