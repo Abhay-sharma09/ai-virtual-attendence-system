@@ -1,101 +1,136 @@
-/* BACKGROUND */
+/* ================= BASE ================= */
 body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    font-family: 'Poppins', sans-serif;
+    background: #0f172a;
 }
 
-/* MAIN CONTAINER */
+/* ================= CONTAINER ================= */
 .container {
     width: 85%;
     margin: auto;
     padding: 20px;
 }
 
-/* TITLE */
+/* ================= TITLE ================= */
 h1 {
     text-align: center;
-    color: white;
+    color: #f1f5f9;
     margin-bottom: 30px;
+    font-weight: 600;
 }
 
-/* CARD DESIGN */
+/* ================= CARD ================= */
 .card {
-    background: white;
-    padding: 20px;
+    background: #1e293b;
+    padding: 25px;
     margin: 20px 0;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    color: #e2e8f0;
 }
 
-/* INPUT BOX */
+/* ================= INPUT ================= */
 input {
     width: 40%;
     padding: 12px;
     margin: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    outline: none;
+    border-radius: 10px;
+    border: 1px solid #334155;
+    background: #0f172a;
+    color: white;
     transition: 0.2s;
+}
+
+input::placeholder {
+    color: #94a3b8;
 }
 
 input:focus {
-    border-color: #007bff;
+    border-color: #3b82f6;
 }
 
-/* BUTTONS */
+/* ================= BUTTON GROUP ================= */
+.btn-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+/* ================= BUTTON BASE ================= */
 .btn {
-    padding: 10px 18px;
+    padding: 12px 22px;
     border: none;
-    border-radius: 8px;
+    border-radius: 999px;
     color: white;
     cursor: pointer;
-    font-weight: bold;
-    margin: 5px;
-    transition: 0.2s;
+    font-weight: 600;
+    font-size: 14px;
+    min-width: 150px;
+    transition: all 0.25s ease;
 }
 
-/* BUTTON COLORS */
-.green { background: #28a745; }
-.blue { background: #007bff; }
-.red { background: #dc3545; }
-.purple { background: #6f42c1; }
+/* ================= BUTTON COLORS ================= */
 
-/* BUTTON HOVER */
+/* REGISTER */
+.green {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+/* START ATTENDANCE */
+.blue {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+}
+
+/* DELETE / CLEAR */
+.red {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+/* DOWNLOAD */
+.purple {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+}
+
+/* VIEW / HIDE */
+.indigo {
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+}
+
+/* ================= BUTTON EFFECTS ================= */
 .btn:hover {
-    opacity: 0.85;
-    transform: scale(1.05);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+    filter: brightness(1.1);
 }
 
-/* TABLE STYLING */
+.btn:active {
+    transform: scale(0.96);
+}
+
+/* ================= TABLE ================= */
 table {
     width: 100%;
-    border-collapse: separate;
-    border-spacing: 0 10px;
+    border-collapse: collapse;
     margin-top: 15px;
 }
 
 /* HEADER */
 thead th {
-    background: #007bff;
-    color: white;
+    background: #334155;
+    color: #f1f5f9;
     padding: 12px;
-    border-radius: 8px;
-    text-align: center;
 }
 
-/* ROW DESIGN */
+/* ROW */
 tbody tr {
-    background: white;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    border-radius: 10px;
-    transition: 0.2s;
+    background: #1e293b;
+    border-bottom: 1px solid #334155;
 }
 
-/* HOVER EFFECT */
+/* HOVER */
 tbody tr:hover {
-    transform: scale(1.01);
-    background: #f1f7ff;
+    background: #334155;
 }
 
 /* CELL */
@@ -104,13 +139,13 @@ td, th {
     text-align: center;
 }
 
-/* 👉 ONLY CHANGE ADDED */
+/* PARTITION */
 td:first-child, th:first-child {
-    border-right: 2px solid #ddd;
+    border-right: 1px solid #475569;
 }
 
-/* TOTAL TEXT */
+/* TEXT */
 p {
+    color: #cbd5f5;
     font-weight: bold;
-    margin-top: 10px;
 }

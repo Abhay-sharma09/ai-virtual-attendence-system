@@ -2,9 +2,7 @@
 function startAttendance(){
     fetch("/start-attendance")
     .then(res => res.json())
-    .then(data => {
-        alert(data.message)
-    })
+    .then(data => alert(data.message))
 }
 
 
@@ -31,10 +29,8 @@ function registerStudent(){
 
         alert(data.message)
 
-        // Clear only if successful
         if(data.message.includes("Successful")){
-            document.getElementById("name").value = ""
-            document.getElementById("roll").value = ""
+            clearInputs()
         }
     })
 }
@@ -47,8 +43,11 @@ function clearInputs(){
 }
 
 
-// LOAD REGISTERED STUDENTS
+// VIEW STUDENTS (SHOW)
 function loadStudents(){
+
+    // 🔥 SHOW SECTION
+    document.getElementById("studentsSection").style.display = "block";
 
     fetch("/student-data")
     .then(res => res.json())
@@ -60,10 +59,16 @@ function loadStudents(){
         document.getElementById("total").innerText = data.total
 
         data.students.forEach(s => {
+
             table.innerHTML += `
                 <tr>
                     <td>${s.Name}</td>
                     <td>${s.Roll}</td>
+                    <td>
+                        <button onclick="deleteStudent('${s.Roll}', '${s.Name}')" class="btn red">
+                            Delete
+                        </button>
+                    </td>
                 </tr>
             `
         })
@@ -71,7 +76,50 @@ function loadStudents(){
 }
 
 
-// DOWNLOAD ATTENDANCE
+// 🔍 SEARCH
+function searchStudent(){
+
+    let input = document.getElementById("search").value.toLowerCase()
+    let rows = document.querySelectorAll("#students tr")
+
+    rows.forEach(row => {
+        let text = row.innerText.toLowerCase()
+        row.style.display = text.includes(input) ? "" : "none"
+    })
+}
+
+
+// ❌ DELETE
+function deleteStudent(roll, name){
+
+    if(!confirm("Delete this student?")) return;
+
+    fetch("/delete-student", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            roll: roll,
+            name: name
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert(data.message)
+        loadStudents()
+    })
+}
+
+
+// 🔥 HIDE STUDENTS
+function hideStudents(){
+
+    document.getElementById("studentsSection").style.display = "none";
+}
+
+
+// DOWNLOAD
 function downloadAttendance(){
     window.open("/attendance-file")
 }
