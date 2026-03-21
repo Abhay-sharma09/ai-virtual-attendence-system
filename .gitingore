@@ -4,6 +4,7 @@ __pycache__/
 
 # Dataset (large files)
 dataset/
+datasets/
 
 # Encodings
 encodings/
