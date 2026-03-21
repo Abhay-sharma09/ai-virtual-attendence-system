@@ -12,3 +12,8 @@ encodings/
 # Excel files
 *attendence.xlsx
 
+dataset/
+encodings/
+__pycache__/
+attendance.xlsx
+
