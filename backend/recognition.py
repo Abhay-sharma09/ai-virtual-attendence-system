@@ -65,9 +65,9 @@ def start_recognition():
                         marked = mark_attendance(name, roll)
 
                         if marked:
-                            message = "Attendance Marked"
+                            message = "Attendance Marked Successfully"
                         else:
-                            message = "Already Marked"
+                            message = " Attendance Already Marked"
 
                         processed_rolls.add(roll)
 
