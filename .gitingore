@@ -1,1 +1,13 @@
+# backend
+__pycache__/
+
+
+# Dataset (large files)
+dataset/
+
+# Encodings
+encodings/
+
+# Excel files
+*attendence.xlsx
 
