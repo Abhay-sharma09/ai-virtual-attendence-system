@@ -4,7 +4,6 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 
 import os
-import threading
 import pandas as pd
 
 from recognition import start_recognition
@@ -12,10 +11,10 @@ from register_student import register_student
 
 app = FastAPI()
 
-# ================= BASE PATH =================
+# BASE PATH
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# ================= FRONTEND =================
+# FRONTEND
 templates = Jinja2Templates(directory=os.path.join(BASE_DIR, "frontend", "templates"))
 app.mount("/static", StaticFiles(directory=os.path.join(BASE_DIR, "frontend", "static")), name="static")
 
@@ -29,15 +28,20 @@ def home(request: Request):
 # ================= START ATTENDANCE =================
 @app.get("/start-attendance")
 def start_attendance():
-    threading.Thread(target=start_recognition).start()
+    start_recognition()   # direct call
     return {"message": "Attendance Started"}
 
 
 # ================= REGISTER STUDENT =================
 @app.post("/register-student")
 def register(name: str = Form(...), roll: str = Form(...)):
-    threading.Thread(target=register_student, args=(name, roll)).start()
-    return {"message": "Registration Started"}
+
+    result = register_student(name, roll)
+
+    if result == "already":
+        return {"message": "⚠ Already Registered"}
+
+    return {"message": "✅ Registration Successful"}
 
 
 # ================= DOWNLOAD ATTENDANCE =================
@@ -46,7 +50,6 @@ def download_attendance():
 
     file_path = os.path.join(BASE_DIR, "attendance.xlsx")
 
-    # Auto-create file if missing
     if not os.path.exists(file_path):
         df = pd.DataFrame(columns=["Name", "Roll", "Timestamp"])
         df.to_excel(file_path, index=False)
@@ -54,7 +57,7 @@ def download_attendance():
     return FileResponse(file_path, filename="attendance.xlsx")
 
 
-# ================= REGISTERED STUDENTS (FROM DATASET) =================
+# ================= REGISTERED STUDENTS =================
 @app.get("/student-data")
 def student_data():
 

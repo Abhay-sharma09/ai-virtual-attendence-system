@@ -1,45 +1,51 @@
-import cv2
 import os
+import cv2
 import subprocess
-
 
 def register_student(name, roll):
 
-    print("Starting registration...")
-
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
     dataset_path = os.path.join(BASE_DIR, "dataset")
 
-    folder = os.path.join(dataset_path, f"{roll}_{name}")
+    # Create folder name
+    folder_name = f"{roll}_{name}"
+    student_path = os.path.join(dataset_path, folder_name)
 
-    if not os.path.exists(folder):
-        os.makedirs(folder)
+    # 🔥 CHECK IF ALREADY REGISTERED
+    if os.path.exists(student_path):
+        print("⚠ Already Registered")
+        return "already"
 
-    cam = cv2.VideoCapture(0)
+    # Create dataset folder
+    os.makedirs(student_path, exist_ok=True)
+
+    cap = cv2.VideoCapture(0)
 
     count = 0
+    print("Capturing images...")
 
     while count < 20:
+        ret, frame = cap.read()
+        if not ret:
+            break
 
-        ret, frame = cam.read()
+        cv2.imshow("Register Face", frame)
 
-        cv2.imshow("Register Student", frame)
-
-        img_path = os.path.join(folder, f"img{count}.jpg")
-
+        img_path = os.path.join(student_path, f"{count}.jpg")
         cv2.imwrite(img_path, frame)
 
         count += 1
 
-        if cv2.waitKey(200) == 27:
+        if cv2.waitKey(1) == 27:
             break
 
-    cam.release()
+    cap.release()
     cv2.destroyAllWindows()
 
-    encode_path = os.path.join(BASE_DIR, "backend", "encode_faces.py")
+    print("Images captured:", count)
 
-    subprocess.run(["py", "-3.10", encode_path])
+    # 🔥 UPDATE ENCODINGS
+    print("Updating encodings...")
+    subprocess.run(["python", "encode_faces.py"])
 
-    print("Student registered")
+    return "registered"
