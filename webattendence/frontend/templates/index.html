@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AI  Virtual Attendance </title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🎓 AI Virtual Attendance</h1>
+
+    <!-- ACTION -->
+    <div class="card">
+        <h2>🎥 Attendance</h2>
+
+        <button onclick="startAttendance()" class="btn green">
+            Start Attendance
+        </button>
+
+        <button onclick="downloadAttendance()" class="btn blue">
+            Download Excel
+        </button>
+    </div>
+
+    <!-- REGISTER -->
+    <div class="card">
+        <h2>📝 Register New Student</h2>
+
+        <input id="name" placeholder="Enter Name">
+        <input id="roll" placeholder="Enter Roll Number">
+
+        <div class="row">
+            <button onclick="registerStudent()" class="btn green">Register</button>
+            <button onclick="clearInputs()" class="btn red">Clear</button>
+        </div>
+    </div>
+
+    <!-- STUDENTS -->
+    <div class="card">
+        <h2>👨‍🎓 Registered Students</h2>
+
+        <button onclick="loadStudents()" class="btn purple">
+            View Students
+        </button>
+
+        <p>Total Students: <span id="total">0</span></p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Roll No</th>
+                </tr>
+            </thead>
+            <tbody id="students"></tbody>
+        </table>
+    </div>
+
+</div>
+
+<script src="/static/script.js"></script>
+
+</body>
+</html>
