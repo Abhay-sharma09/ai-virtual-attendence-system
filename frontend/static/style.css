@@ -41,11 +41,19 @@ h2 {
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
+/* ================= FORM ROW (🔥 FIX) ================= */
+.form-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
 /* ================= INPUT ================= */
 input {
-    width: 38%;
+    flex: 1;
+    min-width: 250px;
     padding: 14px;
-    margin: 10px;
     border-radius: 10px;
     border: 1px solid #6d28d9;
     background: rgba(30, 10, 60, 0.8);
@@ -61,7 +69,7 @@ input:focus {
     box-shadow: 0 0 6px #a855f7;
 }
 
-/* ================= BUTTON BASE ================= */
+/* ================= BUTTON ================= */
 .btn {
     padding: 12px 26px;
     border-radius: 10px;
@@ -70,47 +78,60 @@ input:focus {
     font-size: 14px;
     transition: all 0.25s ease;
 
-    /* 🔥 MATCH INPUT STYLE */
     background: rgba(30, 10, 60, 0.9);
     border: 1px solid #6d28d9;
     color: #e9d5ff;
 }
 
-/* Hover */
 .btn:hover {
     background: rgba(45, 15, 80, 1);
     border-color: #a855f7;
     color: #ffffff;
-
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4);
+}
+
+/* ================= STUDENTS SECTION ================= */
+#studentsSection {
+    background: rgba(30, 10, 60, 0.85);
+    border: 1px solid #6d28d9;
+    border-radius: 12px;
+    padding: 15px;
+    margin-top: 15px;
 }
 
 /* ================= TABLE ================= */
 table {
     width: 100%;
-    margin-top: 20px;
+    margin-top: 10px;
     border-collapse: collapse;
 }
 
+/* HEADER */
 thead th {
-    background: #4c1d95;
+    background: rgba(30, 10, 60, 0.95);
+    border-bottom: 1px solid #6d28d9;
+    color: #c4b5fd;
+    font-weight: 600;
+    letter-spacing: 0.5px;
     padding: 14px;
-    color: #ffffff;
 }
 
+/* ROWS */
 tbody tr {
-    background: rgba(55, 20, 90, 0.5);
+    background: rgba(75, 30, 120, 0.7);
+    border-bottom: 1px solid rgba(139, 92, 246, 0.25);
 }
 
+/* HOVER */
 tbody tr:hover {
-    background: #6d28d9;
+    background: rgba(45, 15, 80, 1);
 }
 
+/* CELL */
 td, th {
     padding: 14px;
     text-align: center;
-    color: #ffffff;
 }
 
 /* ================= TEXT ================= */
