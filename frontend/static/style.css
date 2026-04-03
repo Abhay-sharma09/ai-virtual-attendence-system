@@ -41,7 +41,7 @@ h2 {
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-/* ================= FORM ROW (🔥 FIX) ================= */
+/* ================= FORM ROW ( FIX) ================= */
 .form-row {
     display: flex;
     gap: 12px;
