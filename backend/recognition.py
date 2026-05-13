@@ -48,13 +48,13 @@ def start_recognition():
 
             if len(data["encodings"]) > 0:
 
-                # 🔥 NEW: Distance-based matching
+                #  NEW: Distance-based matching
                 distances = face_recognition.face_distance(data["encodings"], face_encoding)
 
                 min_distance = min(distances)
                 idx = distances.tolist().index(min_distance)
 
-                # 🔥 STRICT THRESHOLD
+                #  STRICT THRESHOLD
                 if min_distance < 0.45:
 
                     name = data["names"][idx]
@@ -99,7 +99,7 @@ def start_recognition():
         if key == 27:
             break
 
-        # 🔥 Press N to register
+        #  Press N to register
         if key == ord("n"):
 
             video.release()

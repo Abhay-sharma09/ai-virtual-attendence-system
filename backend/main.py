@@ -12,40 +12,42 @@ from register_student import register_student
 
 app = FastAPI()
 
-# ================= BASE PATH =================
+
+
+#  BASE PATH
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# ================= FRONTEND =================
+#  FRONTEND 
 templates = Jinja2Templates(directory=os.path.join(BASE_DIR, "frontend", "templates"))
 app.mount("/static", StaticFiles(directory=os.path.join(BASE_DIR, "frontend", "static")), name="static")
 
 
-# ================= HOME =================
+# HOME 
 @app.get("/", response_class=HTMLResponse)
 def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 
-# ================= START ATTENDANCE =================
+# START ATTENDANCE 
 @app.get("/start-attendance")
 def start_attendance():
     start_recognition()
     return {"message": "Attendance Started"}
 
 
-# ================= REGISTER STUDENT =================
+#  REGISTER STUDENT 
 @app.post("/register-student")
 def register(name: str = Form(...), roll: str = Form(...)):
 
     result = register_student(name, roll)
 
     if result == "already":
-        return {"message": "⚠ Already Registered"}
+        return {"message": " Already Registered"}
 
-    return {"message": "✅ Registration Successful"}
+    return {"message": " Registration Successful"}
 
 
-# ================= DOWNLOAD ATTENDANCE =================
+# DOWNLOAD ATTENDANCE 
 @app.get("/attendance-file")
 def download_attendance():
 
@@ -58,7 +60,7 @@ def download_attendance():
     return FileResponse(file_path, filename="attendance.xlsx")
 
 
-# ================= REGISTERED STUDENTS =================
+#  REGISTERED STUDENTS 
 @app.get("/student-data")
 def student_data():
 
@@ -87,7 +89,7 @@ def student_data():
     }
 
 
-# ================= DELETE STUDENT (FIXED) =================
+#  DELETE STUDENT
 import subprocess
 import stat
 
@@ -111,13 +113,13 @@ def delete_student(data: dict = Body(...)):
         try:
             shutil.rmtree(dataset_path, onerror=remove_readonly)
 
-            # 🔥 RE-GENERATE ENCODINGS
+            #  RE-GENERATE ENCODINGS
             print("Updating encodings after delete...")
             subprocess.run(["python", "encode_faces.py"])
 
-            return {"message": "✅ Student Deleted & Encodings Updated"}
+            return {"message": " Student Deleted & Encodings Updated"}
 
         except Exception as e:
-            return {"message": f"❌ Error: {str(e)}"}
+            return {"message": f" Error: {str(e)}"}
 
-    return {"message": "❌ Student Not Found"}
+    return {"message": " Student Not Found"}

@@ -11,9 +11,9 @@ def register_student(name, roll):
     folder_name = f"{roll}_{name}"
     student_path = os.path.join(dataset_path, folder_name)
 
-    # 🔥 CHECK IF ALREADY REGISTERED
+    #  CHECK IF ALREADY REGISTERED
     if os.path.exists(student_path):
-        print("⚠ Already Registered")
+        print(" Already Registered")
         return "already"
 
     # Create dataset folder
@@ -44,7 +44,7 @@ def register_student(name, roll):
 
     print("Images captured:", count)
 
-    # 🔥 UPDATE ENCODINGS
+    #  UPDATE ENCODINGS
     print("Updating encodings...")
     subprocess.run(["python", "encode_faces.py"])
 
