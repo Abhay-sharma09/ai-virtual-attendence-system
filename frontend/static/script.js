@@ -1,18 +1,18 @@
 // START ATTENDANCE
-function startAttendance(){
+function startAttendance() {
     fetch("/start-attendance")
-    .then(res => res.json())
-    .then(data => alert(data.message))
+        .then(res => res.json())
+        .then(data => alert(data.message))
 }
 
 
 // REGISTER STUDENT
-function registerStudent(){
+function registerStudent() {
 
     let name = document.getElementById("name").value
     let roll = document.getElementById("roll").value
 
-    if(name === "" || roll === ""){
+    if (name === "" || roll === "") {
         alert("Enter Name and Roll")
         return
     }
@@ -24,43 +24,43 @@ function registerStudent(){
         },
         body: `name=${name}&roll=${roll}`
     })
-    .then(res => res.json())
-    .then(data => {
+        .then(res => res.json())
+        .then(data => {
 
-        alert(data.message)
+            alert(data.message)
 
-        if(data.message.includes("Successful")){
-            clearInputs()
-        }
-    })
+            if (data.message.includes("Successful")) {
+                clearInputs()
+            }
+        })
 }
 
 
 // CLEAR INPUTS
-function clearInputs(){
+function clearInputs() {
     document.getElementById("name").value = ""
     document.getElementById("roll").value = ""
 }
 
 
 // VIEW STUDENTS (SHOW)
-function loadStudents(){
+function loadStudents() {
 
-    // 🔥 SHOW SECTION
+    //  SHOW SECTION
     document.getElementById("studentsSection").style.display = "block";
 
     fetch("/student-data")
-    .then(res => res.json())
-    .then(data => {
+        .then(res => res.json())
+        .then(data => {
 
-        let table = document.getElementById("students")
-        table.innerHTML = ""
+            let table = document.getElementById("students")
+            table.innerHTML = ""
 
-        document.getElementById("total").innerText = data.total
+            document.getElementById("total").innerText = data.total
 
-        data.students.forEach(s => {
+            data.students.forEach(s => {
 
-            table.innerHTML += `
+                table.innerHTML += `
                 <tr>
                     <td>${s.Name}</td>
                     <td>${s.Roll}</td>
@@ -71,13 +71,13 @@ function loadStudents(){
                     </td>
                 </tr>
             `
+            })
         })
-    })
 }
 
 
-// 🔍 SEARCH
-function searchStudent(){
+//  SEARCH
+function searchStudent() {
 
     let input = document.getElementById("search").value.toLowerCase()
     let rows = document.querySelectorAll("#students tr")
@@ -89,10 +89,10 @@ function searchStudent(){
 }
 
 
-// ❌ DELETE
-function deleteStudent(roll, name){
+//  DELETE
+function deleteStudent(roll, name) {
 
-    if(!confirm("Delete this student?")) return;
+    if (!confirm("Delete this student?")) return;
 
     fetch("/delete-student", {
         method: "POST",
@@ -104,22 +104,22 @@ function deleteStudent(roll, name){
             name: name
         })
     })
-    .then(res => res.json())
-    .then(data => {
-        alert(data.message)
-        loadStudents()
-    })
+        .then(res => res.json())
+        .then(data => {
+            alert(data.message)
+            loadStudents()
+        })
 }
 
 
-// 🔥 HIDE STUDENTS
-function hideStudents(){
+//  HIDE STUDENTS
+function hideStudents() {
 
     document.getElementById("studentsSection").style.display = "none";
 }
 
 
 // DOWNLOAD
-function downloadAttendance(){
+function downloadAttendance() {
     window.open("/attendance-file")
 }
