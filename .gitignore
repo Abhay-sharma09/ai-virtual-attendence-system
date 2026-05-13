@@ -1,0 +1,5 @@
+dataset/
+encodings/
+*.xlsx
+__pycache__/
+
