@@ -109,20 +109,6 @@ This project combines computer vision, backend API development, and frontend UI 
 
 ---
 
-## Python Libraries Used
-
-* os
-* shutil
-* subprocess
-* datetime
-* pickle
-* cv2 (OpenCV)
-* face_recognition
-* pandas
-* openpyxl
-
----
-
 ## Project Structure
 
 webattendence/
