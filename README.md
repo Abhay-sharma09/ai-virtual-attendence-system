@@ -1,85 +1,48 @@
 # AI Virtual Attendance System
 
-## About The Project
+## Overview
 
-AI Virtual Attendance System is a Full Stack + AI based web application that automates attendance marking using real-time face recognition technology.
+AI Virtual Attendance System is a Full Stack AI-powered web application that automates attendance using real-time face recognition. Students can register their facial data, which is converted into facial encodings for identification through a webcam. The system automatically records attendance with timestamps while preventing duplicate entries, providing an efficient and reliable alternative to manual attendance management.
 
-The system captures student face data, generates facial encodings, performs live recognition through webcam, and automatically stores attendance records with timestamps.
+## Features
 
-The project combines Computer Vision, FastAPI backend development, and modern frontend UI design to create a smart and scalable attendance solution.
-
----
-
-# Features
-
-- Student Registration System
+- Student Registration
 - Real-Time Face Recognition
 - Automatic Attendance Marking
 - Duplicate Attendance Prevention
 - Face Encoding Generation
-- Student Search Functionality
-- Delete Student Feature
-- Download Attendance File
-- Dark Themed Responsive UI
-- Excel Based Attendance Storage
+- Student Search & Delete
+- Download Attendance Records
+- Responsive Dark-Themed UI
 
----
+## Tech Stack
 
-# Tech Stack
+**Frontend:** HTML, CSS, JavaScript  
+**Backend:** Python, FastAPI, Uvicorn  
+**AI / Computer Vision:** OpenCV, face_recognition, dlib  
+**Data Handling:** pandas, openpyxl
 
-## Frontend
-- HTML
-- CSS
-- JavaScript
-
-## Backend
-- Python
-- FastAPI
-- Uvicorn
-
-## AI / Computer Vision
-- OpenCV
-- face_recognition
-- dlib
-
-## Data Handling
-- pandas
-- openpyxl
-
----
-
-# Installation
+## Installation & Run
 
 ```bash
-git clone <your-repository-link>
+git clone <repository-url>
 cd webattendence/backend
 pip install fastapi uvicorn opencv-python face-recognition pandas openpyxl
-```
-
----
-
-# How To Run The Project
-
-## Start Backend Server
-
-```bash
 python -m uvicorn main:app --reload --port 8001
 ```
 
-Open in Browser:
+Open your browser and visit:
 
 ```text
 http://127.0.0.1:8001
 ```
 
----
+## Future Improvements
 
-# Future Improvements
-
-- Add Authentication System
+- User Authentication
 - Database Integration
 - Cloud Deployment
 - Analytics Dashboard
-- Mobile Responsive Improvements
+- Enhanced Mobile Responsiveness
 
 
